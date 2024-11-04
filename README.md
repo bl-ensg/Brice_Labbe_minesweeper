@@ -30,6 +30,12 @@ Pour lancer le jeu, exécutez le fichier `Main.py` sur un terminal ou sur un IDE
 
 6. **Modifier les paramètres** : Pour changer les paramètres de la grille, fermez l'interface et relancez `Main.py`.
 
+## Remarques Importantes
+
+- **Taille de la grille** : Une taille de grille trop grande pourrait ne pas être adaptée à l'écran, rendant le jeu difficilement jouable.
+- **Problèmes de récursivité** : Si la taille de la grille est trop élevée (par exemple, au-delà de `size = 50`) et que le nombre de mines (`dif`) est relativement bas, les fonctions récursives du jeu peuvent rencontrer des problèmes de performance et de dépassement de pile. Il est donc recommandé de ne pas dépasser `size = 50` ou, si vous le faites, d'ajouter un nombre de mines suffisant pour équilibrer le jeu.
+
+
 ## Exigences
 
 - Python 3.7 or later
