@@ -1,15 +1,29 @@
 class Case:
     def __init__(self, pos_x, pos_y):
         """
-        Constructeur de la classe Case, qui représente les case du tableau de jeu
+        Initialise une instance de la classe Case représentant une case du jeu de démineur.
 
-        Parameters
+        Paramètres
         ----------
         pos_x : int
-            indice de la ligne contenant la case dans le tableau
+            Position X de la case.
         pos_y : int
-            indice de la colonne contenant la case dans le tableau
+            Position Y de la case.
 
+        Attributs
+        ---------
+        pos_x : int
+            Position X de la case.
+        pos_y : int
+            Position Y de la case.
+        mine : bool
+            Indique si la case contient une mine.
+        reveal : bool
+            Indique si la case est révélée.
+        flag : bool
+            Indique si la case est marquée avec un drapeau.
+        adj : int
+            Nombre de mines adjacentes.
         """
         self.pos_x = int(pos_x)
         self.pos_y = int(pos_y)
@@ -17,40 +31,36 @@ class Case:
         self.reveal = False
         self.flag = False
         self.adj = 0
-    
+
     def reveal_case(self):
         """
-        Révéle une case
+        Révèle la case en la marquant comme découverte.
+
+        Modifie
+        -------
+        reveal : bool
+            Passe à True pour indiquer que la case est révélée.
         """
         self.reveal = True
-        
+
     def toggle_flag(self):
         """
-        Change le statut "flag" d'une case
+        Bascule l'état du drapeau sur la case.
+
+        Modifie
+        -------
+        flag : bool
+            Inverse l'état actuel du drapeau.
         """
         self.flag = not self.flag
-        
+
     def toggle_mine(self):
         """
-        Change le statut "mine" d'une case
-        utilisé uniquement à la création du jeu
+        Bascule l'état de la mine dans la case.
+
+        Modifie
+        -------
+        mine : bool
+            Inverse l'état actuel de la mine.
         """
         self.mine = not self.mine
-    
-    def __str__(self):
-        """
-        Renvoie un string correspondant au statut d'une case
-        utilisé lors de l'affichage du jeu dans la console
-        """
-        if self.reveal:
-            if self.mine:
-                return "M"
-            elif self.adj > 0:
-                return str(self.adj)
-            else:
-                return " "
-        else:
-            if self.flag:
-                return "F"
-            else:
-                return "."

@@ -1,40 +1,36 @@
 # main.py
 
-from minesweeper import Minesweeper
+import sys
+from PyQt5.QtWidgets import QApplication
+from minesweeper_gui import MinesweeperGUI
 
 def main():
     """
-    fonction responsable du déroullement du jeu
+    Point d'entrée de l'application de démineur. Demande à l'utilisateur de saisir
+    la taille de la grille et le nombre de mines, puis initialise l'interface graphique.
+
+    Exceptions
+    ----------
+    ValueError
+        Levée si les entrées utilisateur ne sont pas des entiers positifs.
     """
-    
-    size = input("Select grid size (int): ")
-    dif = input("Select number of mines (int): ")
+    size = input("Sélectionnez la taille de la grille (int) : ")
+    dif = input("Sélectionnez le nombre de mines (int). Le nombre de mines doit être inférieur ou égal au nombre de cases : ")
 
+    try:
+        grid_size = int(size)
+        num_mines = int(dif)
 
-    game = Minesweeper(int(dif), int(size), int(size))
-    
-    print("Initial Minesweeper Grid:")
-    game.grid.show()
+        if grid_size <= 0 or num_mines <= 0:
+            raise ValueError
 
-    game_over = False
-    while not game_over:
-        command = input("\nEnter a command (r for reveal, f for flag) and coordinates (x y): ")
-        inputs = command.split()
+        app = QApplication(sys.argv)
+        window = MinesweeperGUI(num_mines, grid_size, grid_size)
+        sys.exit(app.exec_())
 
-        if len(inputs) != 3:
-            print("Invalid input. Please enter a command followed by two coordinates.")
-            continue
-        
-        cmd, x, y = inputs[0], int(inputs[1]), int(inputs[2])
+    except ValueError:
+        print("Entrée invalide. Veuillez entrer des entiers positifs pour la taille et le nombre de mines.")
 
-        if cmd == 'r':  
-            game_over = not game.reveal_cell(x, y)
-        elif cmd == 'f':  
-            game.toggle_flag(x, y)
-        else:
-            print("Unknown command. Use 'r' to reveal and 'f' to flag.")
-
-    print("Game over!")
 
 if __name__ == "__main__":
     main()
