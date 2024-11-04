@@ -43,4 +43,4 @@ Pour lancer le jeu, exécutez le fichier `Main.py` sur un terminal ou sur un IDE
 
 ## Auteur
 
-- Brice Labbe
+- Brice Labbé
